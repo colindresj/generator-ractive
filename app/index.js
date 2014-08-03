@@ -25,13 +25,13 @@ var RactiveGenerator = yeoman.generators.Base.extend({
 
     var prompts = [{
       type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
+      name: 'router',
+      message: 'Would you like to include a Router.js?',
+      default: false
     }];
 
     this.prompt(prompts, function (props) {
-      this.someOption = props.someOption;
+      this.router = props.router;
 
       done();
     }.bind(this));
