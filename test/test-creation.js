@@ -13,6 +13,9 @@ describe('ractive generator', function () {
       this.app = helpers.createGenerator('ractive:app', [
         '../../app'
       ]);
+
+      this.app.options['skip-install'] = true;
+
       done();
     }.bind(this));
   });

@@ -4,6 +4,7 @@ var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
+var _ = require('lodash');
 
 
 var RactiveGenerator = yeoman.generators.Base.extend({
@@ -24,14 +25,20 @@ var RactiveGenerator = yeoman.generators.Base.extend({
     this.log(yosay('Welcome to the marvelous Ractive generator!'));
 
     var prompts = [{
+      name: 'project',
+      message: 'What\'s your project called?'
+    },
+    {
       type: 'confirm',
       name: 'router',
-      message: 'Would you like to include a Router.js?',
+      message: 'Would you like to include Router.js?',
       default: false
     }];
 
     this.prompt(prompts, function (props) {
-      this.router = props.router;
+      this.props = this.props || {};
+
+      _.extend(this.props, props);
 
       done();
     }.bind(this));
