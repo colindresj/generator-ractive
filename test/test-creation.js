@@ -1,41 +1,85 @@
-/*global describe, beforeEach, it */
 'use strict';
-var path = require('path'),
+
+var ractive,
+    path = require('path'),
     helpers = require('yeoman-generator').test;
 
-describe('ractive generator', function () {
+describe('yo ractive', function () {
   beforeEach(function (done) {
     helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
       if (err) {
         return done(err);
       }
 
-      this.app = helpers.createGenerator('ractive:app', [
+      ractive = helpers.createGenerator('ractive:app', [
         '../../app'
-      ]);
+      ], false, {
+        'appPath': 'app',
+        'skip-install': true,
+        'skip-welcome-message': true,
+        'skip-message': true
+      });
 
-      this.app.options['skip-install'] = true;
+      helpers.mockPrompt(ractive, {
+        'project': 'mock-project',
+        'router': false
+      });
 
       done();
-    }.bind(this));
+    });
   });
 
-  it('creates expected files', function (done) {
-    var expected = [
-      'bower.json',
-      'package.json',
-      '.editorconfig',
-      '.gitattributes',
-      '.gitignore',
-      '.jshintrc'
-    ];
+  describe('project files', function () {
+    it('creates the expected dot files', function (done) {
+      var expected = [
+        '.editorconfig',
+        '.gitattributes',
+        '.gitignore',
+        '.jshintrc'
+      ];
+      ractive.run({}, function () {
+        helpers.assertFile(expected);
 
-    helpers.mockPrompt(this.app, {
-      'someOption': true
+        done();
+      });
     });
-    this.app.options['skip-install'] = true;
-    this.app.run({}, function () {
-      helpers.assertFile(expected);
+
+    it('creates the expected dependency management files', function (done) {
+      var expected = [
+        'bower.json',
+        'package.json'
+      ];
+
+      ractive.run({}, function () {
+        helpers.assertFile(expected);
+
+        done();
+      });
+    });
+
+    it('creates the expected JavaScript files', function (done) {
+      var expected = ['app/app.js'];
+
+      ractive.run({}, function () {
+        helpers.assertFile(expected);
+
+        done();
+      });
+    });
+
+    it('creates a closure', function (done) {
+      var expected = 'app/app.js';
+
+      ractive.run({}, function () {
+        helpers.assertFileContent(expected,
+          /^\(function \(window, undefined\) {/i
+        );
+
+        helpers.assertFileContent(expected,
+          /}\)\(window\);/i
+        );
+      });
+
       done();
     });
   });

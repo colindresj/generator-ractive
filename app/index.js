@@ -1,14 +1,15 @@
 'use strict';
+
 var util = require('util'),
     path = require('path'),
     yeoman = require('yeoman-generator'),
     yosay = require('yosay'),
     chalk = require('chalk'),
     _ = require('lodash'),
-    RactiveGenerator;
+    RactiveProjectGenerator;
 
 
-RactiveGenerator = yeoman.generators.Base.extend({
+RactiveProjectGenerator = yeoman.generators.Base.extend({
   init: function () {
     this.pkg = require('../package.json');
 
@@ -47,10 +48,10 @@ RactiveGenerator = yeoman.generators.Base.extend({
 
   app: function () {
     this.mkdir('app');
-    this.mkdir('app/templates');
 
     this.copy('_package.json', 'package.json');
     this.copy('_bower.json', 'bower.json');
+    this.copy('app.js', 'app/app.js');
   },
 
   projectfiles: function () {
@@ -61,4 +62,4 @@ RactiveGenerator = yeoman.generators.Base.extend({
   }
 });
 
-module.exports = RactiveGenerator;
+module.exports = RactiveProjectGenerator;

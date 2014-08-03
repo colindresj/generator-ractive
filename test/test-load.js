@@ -1,10 +1,11 @@
 /*global describe, beforeEach, it*/
 'use strict';
+
 var assert = require('assert');
 
 describe('ractive generator', function () {
   it('can be imported without blowing up', function () {
-    var app = require('../app');
-    assert(app !== undefined);
+    assert(require('../app') !== undefined);
+    assert(require('../ractive') !== undefined);
   });
 });
