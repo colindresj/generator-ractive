@@ -1,7 +1,7 @@
 /*global describe, beforeEach, it */
 'use strict';
-var path = require('path');
-var helpers = require('yeoman-generator').test;
+var path = require('path'),
+    helpers = require('yeoman-generator').test;
 
 describe('ractive generator', function () {
   beforeEach(function (done) {

@@ -1,13 +1,14 @@
 'use strict';
-var util = require('util');
-var path = require('path');
-var yeoman = require('yeoman-generator');
-var yosay = require('yosay');
-var chalk = require('chalk');
-var _ = require('lodash');
+var util = require('util'),
+    path = require('path'),
+    yeoman = require('yeoman-generator'),
+    yosay = require('yosay'),
+    chalk = require('chalk'),
+    _ = require('lodash'),
+    RactiveGenerator;
 
 
-var RactiveGenerator = yeoman.generators.Base.extend({
+RactiveGenerator = yeoman.generators.Base.extend({
   init: function () {
     this.pkg = require('../package.json');
 
@@ -19,12 +20,12 @@ var RactiveGenerator = yeoman.generators.Base.extend({
   },
 
   askFor: function () {
-    var done = this.async();
+    var done = this.async(), prompts;
 
     // Have Yeoman greet the user.
     this.log(yosay('Welcome to the marvelous Ractive generator!'));
 
-    var prompts = [{
+    prompts = [{
       name: 'project',
       message: 'What\'s your project called?'
     },
