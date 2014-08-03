@@ -23,7 +23,6 @@ MIT
 
 ## Todo
 - Use yo mocha for test generation
-- Use html5 boilerplate
 - Component subcommand
 - Option to set template style when generating a new ractive
 - Browserify, AMD or regular script

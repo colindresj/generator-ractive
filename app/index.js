@@ -10,6 +10,16 @@ var util = require('util'),
 
 
 RactiveProjectGenerator = yeoman.generators.Base.extend({
+  constructor: function () {
+    yeoman.generators.Base.apply(this, arguments);
+
+    this.option('skip-analytics', {
+      desc: 'Do not include Google Analytics tracking code',
+      type: Boolean,
+      defaults: false
+    });
+  },
+
   init: function () {
     this.pkg = require('../package.json');
 
@@ -51,7 +61,8 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
 
     this.copy('_package.json', 'package.json');
     this.copy('_bower.json', 'bower.json');
-    this.copy('app.js', 'app/app.js');
+    this.copy('app/app.js', 'app/app.js');
+    this.template('app/index.html', 'app/index.html');
   },
 
   projectfiles: function () {

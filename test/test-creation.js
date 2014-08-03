@@ -67,6 +67,14 @@ describe('yo ractive', function () {
       });
     });
 
+    it('creates the exepcted index file', function (done) {
+      ractive.run({}, function () {
+        helpers.assertFile(['app/index.html']);
+
+        done();
+      })
+    });
+
     it('creates a closure', function (done) {
       var expected = 'app/app.js';
 
