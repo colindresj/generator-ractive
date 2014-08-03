@@ -1,5 +1,7 @@
 {
   "name": "<%= _.slugify(props.project) %>",
   "version": "0.0.0",
-  "dependencies": {}
+  "dependencies": {
+    <% if (props.router) { %> "router": "^0.6.2"<% } %>
+  }
 }
