@@ -19,9 +19,12 @@ describe('ractive generator', function () {
 
   it('creates expected files', function (done) {
     var expected = [
-      // add files you expect to exist here.
-      '.jshintrc',
-      '.editorconfig'
+      'bower.json',
+      'package.json',
+      '.editorconfig',
+      '.gitattributes',
+      '.gitignore',
+      '.jshintrc'
     ];
 
     helpers.mockPrompt(this.app, {

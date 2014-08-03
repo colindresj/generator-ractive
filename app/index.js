@@ -47,6 +47,8 @@ var RactiveGenerator = yeoman.generators.Base.extend({
 
   projectfiles: function () {
     this.copy('editorconfig', '.editorconfig');
+    this.copy('gitignore', '.gitignore');
+    this.copy('gitattributes', '.gitattributes');
     this.copy('jshintrc', '.jshintrc');
   }
 });
