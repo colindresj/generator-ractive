@@ -13,6 +13,13 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
   constructor: function () {
     yeoman.generators.Base.apply(this, arguments);
 
+    this.option('test-framework', {
+      desc: 'Test framework to be invoked (mocha/jasmine)',
+      type: String,
+      defaults: 'mocha'
+    });
+    this.testFramework = this.options['test-framework'];
+
     this.option('skip-analytics', {
       desc: 'Do not include Google Analytics tracking code',
       type: Boolean,
@@ -70,6 +77,18 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
     this.copy('gitignore', '.gitignore');
     this.copy('gitattributes', '.gitattributes');
     this.copy('jshintrc', '.jshintrc');
+  },
+
+  testfiles: function () {
+    this.testConfig = {
+      assertString: this.testFramework === 'mocha' ? 'should assert something' :
+        'asserts something',
+      expectation: this.testFramework === 'mocha' ? 'expect(true).to.be.true;' :
+        'expect(true).toBe(true);'
+    }
+
+    this.template('test/app_test.js', 'test/app_test.js');
+    this.config.set('testFramework', this.testFramework);
   }
 });
 

@@ -22,10 +22,6 @@ $ yo ractive
 MIT
 
 ## Todo
-- Use yo mocha for test generation
-- Component subcommand
-- Option to set template style when generating a new ractive
-- Browserify, AMD or regular script
 - Grunt file subcommand
   - Autoprefix
   - Comb css
@@ -35,5 +31,8 @@ MIT
   - Livereload
   - Sass/less compile
   - Image optimization
+- Component subcommand
+- Browserify, AMD or regular script
+- Option to set template style when generating a new ractive
 - Deploy command
 

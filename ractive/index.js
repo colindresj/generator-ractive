@@ -7,6 +7,17 @@ var yeoman = require('yeoman-generator'),
 RactiveGenerator = yeoman.generators.NamedBase.extend({
   init: function () {
     this.template('ractive.js', 'app/ractives/' + this.name + '.js');
+  },
+  testFiles: function () {
+    this.testFramework = this.config.get('testFramework');
+    this.testConfig = {
+      assertString: this.testFramework === 'mocha' ? 'should assert something' :
+        'asserts something',
+      expectation: this.testFramework === 'mocha' ? 'expect(true).to.be.true;' :
+        'expect(true).toBe(true);'
+    }
+
+    this.template('ractive_test.js', 'test/ractives/' + this.name + '_test.js');
   }
 });
 

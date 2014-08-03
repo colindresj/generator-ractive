@@ -13,6 +13,7 @@ describe('yo ractive:ractive', function () {
       }
 
       ractive = helpers.createGenerator('ractive:ractive', [
+        '../../app',
         '../../ractive',
       ], [ractiveName], {
         'appPath': 'app',
@@ -26,8 +27,13 @@ describe('yo ractive:ractive', function () {
   });
 
   it('should generate a new ractive', function (done) {
+    var expected = [
+      'app/ractives/' + ractiveName + '.js',
+      'test/ractives/' + ractiveName + '_test.js'
+    ];
+
     ractive.run([], function () {
-      helpers.assertFile(['app/ractives/' + ractiveName + '.js']);
+      helpers.assertFile(expected);
 
       done();
     });

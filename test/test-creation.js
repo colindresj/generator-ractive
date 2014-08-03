@@ -14,13 +14,13 @@ describe('yo ractive', function () {
       ractive = helpers.createGenerator('ractive:app', [
         '../../app'
       ], false, {
-        'appPath': 'app',
         'skip-install': true,
         'skip-welcome-message': true,
         'skip-message': true
       });
 
       helpers.mockPrompt(ractive, {
+        'appPath': 'app',
         'project': 'mock-project',
         'router': false
       });
@@ -37,6 +37,7 @@ describe('yo ractive', function () {
         '.gitignore',
         '.jshintrc'
       ];
+
       ractive.run({}, function () {
         helpers.assertFile(expected);
 
@@ -58,7 +59,10 @@ describe('yo ractive', function () {
     });
 
     it('creates the expected JavaScript files', function (done) {
-      var expected = ['app/app.js'];
+      var expected = [
+        'app/app.js',
+        'test/app_test.js'
+      ];
 
       ractive.run({}, function () {
         helpers.assertFile(expected);
@@ -86,9 +90,9 @@ describe('yo ractive', function () {
         helpers.assertFileContent(expected,
           /}\)\(window\);/i
         );
-      });
 
-      done();
+        done();
+      });
     });
   });
 });

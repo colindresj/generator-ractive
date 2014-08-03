@@ -18,10 +18,11 @@
   "trailing": true,
   "smarttabs": true,
   "white": true,
-  "predef": {
+  "predef": [
     "before",
     "beforeEach",
     "describe",
+    "expect",
     "it"
-  },
+  ],
 }
