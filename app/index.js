@@ -134,7 +134,9 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
     }
 
     this.template('test/app_test.js', 'test/app_test.js');
-    this.config.set('testFramework', this.testFramework);
+    if (!this.options['skip-yo-rc']) {
+      this.config.set('testFramework', this.testFramework);
+    }
   }
 });
 

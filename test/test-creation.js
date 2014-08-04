@@ -15,13 +15,17 @@ describe('yo ractive', function () {
         '../../app'
       ], false, {
         'skip-install': true,
-        'skip-welcome-message': true
+        'skip-welcome-message': true,
+        'skip-yo-rc': true
       });
 
       helpers.mockPrompt(ractive, {
         'appPath': 'app',
         'project': 'mock-project',
-        'router': false
+        'router': false,
+        'includeSass': false,
+        'includeModernizr': false,
+        'includejQuery': false
       });
 
       done();
