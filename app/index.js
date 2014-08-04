@@ -25,6 +25,9 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
       type: Boolean,
       defaults: false
     });
+
+    this.includeSass = false;
+    this.includeModernizr = false;
   },
 
   init: function () {
@@ -68,8 +71,8 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
 
     this.copy('_package.json', 'package.json');
     this.copy('_bower.json', 'bower.json');
-    this.copy('app/app.js', 'app/app.js');
-    this.template('app/index.html', 'app/index.html');
+    this.copy('app/scripts/app.js', 'app/scripts/app.js');
+    this.copy('app/index.html', 'app/index.html');
   },
 
   projectfiles: function () {
@@ -77,6 +80,7 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
     this.copy('gitignore', '.gitignore');
     this.copy('gitattributes', '.gitattributes');
     this.copy('jshintrc', '.jshintrc');
+    this.template('Gruntfile.js', 'Gruntfile.js');
   },
 
   testfiles: function () {

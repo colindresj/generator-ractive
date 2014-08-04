@@ -28,7 +28,7 @@ describe('yo ractive:ractive', function () {
 
   it('should generate a new ractive', function (done) {
     var expected = [
-      'app/ractives/' + ractiveName + '.js',
+      'app/scripts/ractives/' + ractiveName + '.js',
       'test/ractives/' + ractiveName + '_test.js'
     ];
 
@@ -41,7 +41,7 @@ describe('yo ractive:ractive', function () {
 
   it('should give the ractive the passed in name', function (done) {
     ractive.run([], function () {
-      helpers.assertFileContent('app/ractives/' + ractiveName + '.js',
+      helpers.assertFileContent('app/scripts/ractives/' + ractiveName + '.js',
         new RegExp('App.Ractives.' + ractiveName + ' = new Ractive', 'i')
       );
 
@@ -51,7 +51,7 @@ describe('yo ractive:ractive', function () {
 
   it('should give the ractive element the passed in name', function (done) {
     ractive.run([], function () {
-      helpers.assertFileContent('app/ractives/' + ractiveName + '.js',
+      helpers.assertFileContent('app/scripts/ractives/' + ractiveName + '.js',
         new RegExp('el: \'' + ractiveName + '\'', 'i')
       );
 
@@ -61,7 +61,7 @@ describe('yo ractive:ractive', function () {
 
   it('should give the ractive template the passed in name', function (done) {
     ractive.run([], function () {
-      helpers.assertFileContent('app/ractives/' + ractiveName + '.js',
+      helpers.assertFileContent('app/scripts/ractives/' + ractiveName + '.js',
         new RegExp('template: \'' + ractiveName + '-template\'', 'i')
       );
 

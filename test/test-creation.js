@@ -35,7 +35,8 @@ describe('yo ractive', function () {
         '.editorconfig',
         '.gitattributes',
         '.gitignore',
-        '.jshintrc'
+        '.jshintrc',
+        'Gruntfile.js'
       ];
 
       ractive.run({}, function () {
@@ -60,7 +61,7 @@ describe('yo ractive', function () {
 
     it('creates the expected JavaScript files', function (done) {
       var expected = [
-        'app/app.js',
+        'app/scripts/app.js',
         'test/app_test.js'
       ];
 
@@ -80,7 +81,7 @@ describe('yo ractive', function () {
     });
 
     it('creates a closure', function (done) {
-      var expected = 'app/app.js';
+      var expected = 'app/scripts/app.js';
 
       ractive.run({}, function () {
         helpers.assertFileContent(expected,

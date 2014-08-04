@@ -6,7 +6,7 @@ var yeoman = require('yeoman-generator'),
 
 RactiveGenerator = yeoman.generators.NamedBase.extend({
   init: function () {
-    this.template('ractive.js', 'app/ractives/' + this.name + '.js');
+    this.template('ractive.js', 'app/scripts/ractives/' + this.name + '.js');
   },
   testFiles: function () {
     this.testFramework = this.config.get('testFramework');
