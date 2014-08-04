@@ -15,12 +15,7 @@ describe('yo ractive:ractive', function () {
       ractive = helpers.createGenerator('ractive:ractive', [
         '../../app',
         '../../ractive',
-      ], [ractiveName], {
-        'appPath': 'app',
-        'skip-install': true,
-        'skip-welcome-message': true,
-        'skip-message': true
-      });
+      ], [ractiveName], {});
 
       done();
     });

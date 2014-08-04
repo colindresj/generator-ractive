@@ -26,7 +26,6 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
       defaults: false
     });
 
-    this.includeSass = false;
     this.includeModernizr = false;
   },
 
@@ -44,7 +43,9 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
     var done = this.async(), prompts;
 
     // Have Yeoman greet the user.
-    this.log(yosay('Welcome to the marvelous Ractive generator!'));
+    if (!this.options['skip-welcome-message']) {
+      this.log(yosay('Welcome to the marvelous Ractive generator!'));
+    }
 
     prompts = [{
       name: 'project',
@@ -55,12 +56,47 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
       name: 'router',
       message: 'Would you like to include Router.js?',
       default: false
+    },
+    {
+      type: 'checkbox',
+      name: 'features',
+      message: 'What more would you like?',
+      choices: [{
+        name: 'Sass',
+        value: 'includeSass',
+        checked: false
+      }, {
+        name: 'Modernizr',
+        value: 'includeModernizr',
+        checked: false
+      }],
+    },
+    {
+      when: function (answers) {
+        return answers.features.indexOf('includeSass') !== -1;
+      },
+      type: 'confirm',
+      name: 'libsass',
+      value: 'includeLibSass',
+      message: 'Would you like to use libsass? Read up more at \n' +
+        chalk.green('https://github.com/andrew/node-sass#node-sass'),
+      default: false
     }];
 
     this.prompt(prompts, function (props) {
-      this.props = this.props || {};
+      var props, features;
 
-      _.extend(this.props, props);
+      this.props = this.props || {};
+      function hasFeature(feature) {
+        return features && features.indexOf(feature) !== -1;
+      }
+
+      props = _.extend(this.props, props);
+      features = props.features;
+
+      this.includeSass = ('includeSass');
+      this.includeLibSass = props.libsass;
+      this.includeRubySass = !props.libsass;
 
       done();
     }.bind(this));

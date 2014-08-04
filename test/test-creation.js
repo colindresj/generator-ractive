@@ -15,8 +15,7 @@ describe('yo ractive', function () {
         '../../app'
       ], false, {
         'skip-install': true,
-        'skip-welcome-message': true,
-        'skip-message': true
+        'skip-welcome-message': true
       });
 
       helpers.mockPrompt(ractive, {
