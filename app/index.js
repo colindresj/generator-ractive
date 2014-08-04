@@ -69,6 +69,10 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
         name: 'Modernizr',
         value: 'includeModernizr',
         checked: false
+      }, {
+        name: 'jQuery',
+        value: 'includejQuery',
+        checked: false
       }],
     },
     {
@@ -94,7 +98,9 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
       props = _.extend(this.props, props);
       features = props.features;
 
-      this.includeSass = ('includeSass');
+      this.includeModernizr = hasFeature('includeModernizr');
+      this.includejQuery = hasFeature('includejQuery');
+      this.includeSass = hasFeature('includeSass');
       this.includeLibSass = props.libsass;
       this.includeRubySass = !props.libsass;
 
@@ -105,8 +111,8 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
   app: function () {
     this.mkdir('app');
 
-    this.copy('_package.json', 'package.json');
-    this.copy('_bower.json', 'bower.json');
+    this.template('_package.json', 'package.json');
+    this.template('_bower.json', 'bower.json');
     this.copy('app/scripts/app.js', 'app/scripts/app.js');
     this.copy('app/index.html', 'app/index.html');
   },

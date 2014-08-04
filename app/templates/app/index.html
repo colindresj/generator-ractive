@@ -6,9 +6,18 @@
     <title><%= props.project %></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
-
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild --><% if (includeModernizr) { %>
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+    <% } %>
   </head>
   <body>
     <!--[if lt IE 8]>
@@ -17,7 +26,15 @@
       improve your experience.</p>
     <![endif]-->
 
+    <div>
+      <h1>Hello, and welcome to Ractive.js</h1>
+      <h3>Brought to you by <code>generator-ractive</code></h3>
+    </div>
 
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <!-- endbower -->
+    <!-- endbuild -->
     <% if (!options['skip-analytics']) { %>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
@@ -27,7 +44,6 @@
       e.src='//www.google-analytics.com/analytics.js';
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-XXXXX-X','auto');ga('send','pageview');
-    </script>
-    <% } %>
+    </script><% } %>
   </body>
 </html>
