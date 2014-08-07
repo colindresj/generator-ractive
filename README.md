@@ -2,7 +2,6 @@
 
 > Yeoman generator for Ractive.js
 
-
 ## Getting Started
 
 Install generator-ractive from npm:

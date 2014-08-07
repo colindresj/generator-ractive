@@ -115,6 +115,10 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
     this.template('_bower.json', 'bower.json');
     this.copy('app/scripts/app.js', 'app/scripts/app.js');
     this.copy('app/index.html', 'app/index.html');
+
+    if (!this.options['skip-yo-rc']) {
+      this.config.set('nameSpace', _.classify(this.name));
+    }
   },
 
   projectfiles: function () {

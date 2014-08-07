@@ -1,9 +1,9 @@
-(function (App, Ractive) {
+(function (<%= this.config.get('nameSpace') %>, Ractive) {
   'use strict';
 
-  App.Ractives.<%= _.slugify(name) %> = new Ractive({
+  <%= this.config.get('nameSpace') %>.Ractives.<%= _.slugify(name) %> = new Ractive({
     el: '<%= _.slugify(name) %>',
     template: '<%= _.slugify(name) %>-template',
     data: {}
   });
-})(window.<%= _.camelize(name) %>, Ractive);
+})(window.<%= this.config.get('nameSpace') %>, Ractive);
