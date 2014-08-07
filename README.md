@@ -22,15 +22,6 @@ $ yo ractive
 MIT
 
 ## Todo
-- Grunt file subcommand
-  - Autoprefix
-  - Comb css
-  - Min css
-  - Watch
-  - Linting
-  - Livereload
-  - Sass/less compile
-  - Image optimization
 - Component subcommand
 - Browserify, AMD or regular script
 - Option to set template style when generating a new ractive

@@ -23,6 +23,7 @@
     "beforeEach",
     "describe",
     "expect",
-    "it"
+    "it",
+    "window"
   ],
 }

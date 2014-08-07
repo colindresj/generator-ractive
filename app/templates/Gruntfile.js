@@ -88,20 +88,6 @@ module.exports = function (grunt) {
           }
         }
       },
-      test: {
-        options: {
-          open: false,
-          port: 9001,
-          middleware: function (connect) {
-            return [
-              connect.static('.tmp'),
-              connect.static('test'),
-              connect().use('/bower_components', connect.static('./bower_components')),
-              connect.static(config.app)
-            ];
-          }
-        }
-      },
       dist: {
         options: {
           base: '<%%= config.dist %>',
@@ -140,12 +126,12 @@ module.exports = function (grunt) {
     },<% if (testFramework === 'mocha') { %>
 
     // Mocha testing framework configuration options
-    mocha: {
-      all: {
+    mochaTest: {
+      test: {
         options: {
-          run: true,
-          urls: ['http://<%%= connect.test.options.hostname %>:<%%= connect.test.options.port %>/index.html']
-        }
+          reporter: 'spec'
+        },
+        src: 'test/{,*/}*.js'
       }
     },<% } else if (testFramework === 'jasmine') { %>
 
@@ -165,8 +151,8 @@ module.exports = function (grunt) {
         includePaths: ['bower_components']
         <% } else { %>
         sourcemap: true,
-        loadPath: 'bower_components'
-      <% } %>},
+        loadPath: 'bower_components'<% } %>
+      },
       dist: {
         files: [{
           expand: true,
@@ -416,9 +402,8 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
-      'connect:test',<% if (testFramework === 'mocha') { %>
-      'mocha'<% } else if (testFramework === 'jasmine') { %>
-      'jasmine'<% } %>
+      <% if (testFramework === 'mocha') { %>'mochaTest'<% }
+      else if (testFramework === 'jasmine') { %>'jasmine'<% } %>
     ]);
   });
 

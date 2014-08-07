@@ -1,3 +1,4 @@
+/* jshint expr: true */
 (function () {
   'use strict';
   <% if (testFramework === 'mocha') { %>
