@@ -1,7 +1,7 @@
 (function (window, undefined) {
   'use strict';
 
-  window.App = window.App || {
+  window.<%= _.camelize(name) %> = window.<%= _.camelize(name) %> || {
     Ractives: {}
   };
 

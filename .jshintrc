@@ -24,6 +24,7 @@
     "describe",
     "expect",
     "it",
-    "window"
+    "window",
+    "Ractive"
   ],
 }

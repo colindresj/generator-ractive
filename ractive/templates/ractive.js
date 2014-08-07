@@ -6,4 +6,4 @@
     template: '<%= _.slugify(name) %>-template',
     data: {}
   });
-})(App, Ractive);
+})(window.<%= _.camelize(name) %>, Ractive);
