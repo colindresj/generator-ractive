@@ -21,7 +21,6 @@ $ yo ractive
 MIT
 
 ## Todo
-- Component subcommand
 - Browserify, AMD or regular script
 - Option to set template style when generating a new ractive
 - Deploy command
