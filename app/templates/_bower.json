@@ -1,8 +1,8 @@
 {
   "name": "<%= _.slugify(props.project) %>",
   "version": "0.0.0",
-  "dependencies": {<% } if (includejQuery) { %>
-    "jQuery": "~1.11.1", <% if (includeModernizr) { %>
+  "dependencies": {<% if (includejQuery) { %>
+    "jQuery": "~1.11.1", <% } %><% if (includeModernizr) { %>
     "modernizr": "~2.8.2", <% } %>
     "ractive": "~0.5.5"
   }

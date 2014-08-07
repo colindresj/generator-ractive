@@ -6,6 +6,7 @@ var yeoman = require('yeoman-generator'),
 
 RactiveGenerator = yeoman.generators.NamedBase.extend({
   init: function () {
+    this.nameSpace = this.config.get('nameSpace');
     this.template('ractive.js', 'app/scripts/ractives/' + this.name + '.js');
   },
   testFiles: function () {

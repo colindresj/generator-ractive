@@ -1,9 +1,9 @@
-(function (<%= this.config.get('nameSpace') %>, Ractive) {
+(function (<%= this.nameSpace %>, Ractive) {
   'use strict';
 
-  <%= this.config.get('nameSpace') %>.Ractives.<%= _.slugify(name) %> = new Ractive({
+  <%= this.nameSpace %>.Ractives.<%= _.slugify(name) %> = new Ractive({
     el: '<%= _.slugify(name) %>',
     template: '<%= _.slugify(name) %>-template',
     data: {}
   });
-})(window.<%= this.config.get('nameSpace') %>, Ractive);
+})(window.<%= this.nameSpace %>, Ractive);

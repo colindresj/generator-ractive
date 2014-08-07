@@ -37,7 +37,7 @@ describe('yo ractive:ractive', function () {
   it('should give the ractive the passed in name', function (done) {
     ractive.run([], function () {
       helpers.assertFileContent('app/scripts/ractives/' + ractiveName + '.js',
-        new RegExp('App.Ractives.' + ractiveName + ' = new Ractive', 'i')
+        new RegExp('.Ractives.' + ractiveName + ' = new Ractive', 'i')
       );
 
       done();
