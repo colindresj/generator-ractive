@@ -11,10 +11,10 @@
     <!-- bower:css -->
     <!-- endbower -->
     <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
+    <!-- build:css styles/app.css -->
+    <link rel="stylesheet" href="styles/app.css">
     <!-- endbuild --><% if (includeModernizr) { %>
-    <!-- build:js scripts/vendor/modernizr.js -->
+    <!-- build:js(.) scripts/modernizr.js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
     <% } %>
@@ -35,7 +35,7 @@
     <!-- bower:js -->
     <!-- endbower -->
     <!-- endbuild -->
-    <!-- build:js(.tmp) scripts/app.js -->
+    <!-- build:js scripts/app.js -->
     <script src="scripts/app.js"></script>
     <!-- endbuild -->
     <% if (!options['skip-analytics']) { %>
