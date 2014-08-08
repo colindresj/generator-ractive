@@ -50,14 +50,27 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
     prompts = [{
       name: 'project',
       message: 'What\'s your project called?'
-    },
-    {
+    }, {
       type: 'confirm',
       name: 'router',
       message: 'Would you like to include Router.js?',
       default: false
-    },
-    {
+    }, {
+      type: 'list',
+      name: 'loadMethod',
+      message: 'How would you like to load your scripts?',
+      choices: [{
+        name: 'Regular script tags',
+        value: 'scriptTags'
+      }, {
+        name: 'AMD (Require.js)',
+        value: 'AMD'
+      }, {
+        name: 'Browserify',
+        value: 'Browserify'
+      }],
+      default: 0
+    }, {
       type: 'checkbox',
       name: 'features',
       message: 'What more would you like?',
@@ -74,8 +87,7 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
         value: 'includejQuery',
         checked: false
       }],
-    },
-    {
+    }, {
       when: function (answers) {
         return answers.features.indexOf('includeSass') !== -1;
       },
@@ -118,6 +130,7 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
 
     if (!this.options['skip-yo-rc']) {
       this.config.set('nameSpace', this._.classify(this.props.project));
+      this.config.set('loadMethod', this.props.loadMethod);
     }
   },
 
