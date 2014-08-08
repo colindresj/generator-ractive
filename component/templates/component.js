@@ -1,4 +1,4 @@
-(function (<%= this.nameSpace %>, Ractive) {
+(function (<%= nameSpace %>, Ractive) {
   'use strict';
 
   Ractive.components.<%= _.slugify(name) %> = Ractive.extend({
@@ -8,4 +8,4 @@
     init: function () {},
     data: {}
   });
-})(window.<%= this.nameSpace %>, Ractive);
+})(window.<%= nameSpace %>, Ractive);

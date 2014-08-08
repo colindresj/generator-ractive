@@ -1,9 +1,9 @@
-(function (<%= this.nameSpace %>, Ractive) {
+(function (<%= nameSpace %>, Ractive) {
   'use strict';
 
-  <%= this.nameSpace %>.Ractives.<%= _.slugify(name) %> = new Ractive({
+  <%= nameSpace %>.Ractives.<%= _.slugify(name) %> = new Ractive({
     el: '<%= _.slugify(name) %>',
     template: '<%= _.slugify(name) %>-template',
     data: {}
   });
-})(window.<%= this.nameSpace %>, Ractive);
+})(window.<%= nameSpace %>, Ractive);
