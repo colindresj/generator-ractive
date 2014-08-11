@@ -36,8 +36,12 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js scripts/app.js -->
+    <% if (loadMethod === 'scriptTags') { %>
     <script src="scripts/app.js"></script>
     <!-- generator:ractive script -->
+    <% } else if (loadMethod === 'AMD') {%>
+    <script data-main="dist/app.min.js" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.min.js"></script>
+    <% } %>
     <!-- endbuild -->
     <% if (!options['skip-analytics']) { %>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

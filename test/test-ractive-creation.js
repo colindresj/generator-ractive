@@ -3,6 +3,7 @@
 var ractive,
     ractiveName = 'foo',
     path = require('path'),
+    inject = require('../lib/inject-script-tag'),
     helpers = require('yeoman-generator').test;
 
 describe('yo ractive:ractive', function () {
@@ -16,6 +17,12 @@ describe('yo ractive:ractive', function () {
         '../../app',
         '../../ractive',
       ], [ractiveName], {});
+
+      helpers.stub(ractive.config, 'get', function (key) {
+        if (key === 'loadMethod') {
+          return 'scriptTags';
+        }
+      });
 
       done();
     });

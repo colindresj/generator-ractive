@@ -115,22 +115,30 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
       this.includeSass = hasFeature('includeSass');
       this.includeLibSass = props.libsass;
       this.includeRubySass = !props.libsass;
+      this.loadMethod = props.loadMethod;
 
       done();
     }.bind(this));
   },
 
   app: function () {
-    this.mkdir('app');
-
-    this.template('_package.json', 'package.json');
-    this.template('_bower.json', 'bower.json');
-    this.template('app/scripts/app.js', 'app/scripts/app.js');
-    this.template('app/index.html', 'app/index.html');
+    var loadMethod = this.loadMethod;
 
     if (!this.options['skip-yo-rc']) {
-      this.config.set('nameSpace', this._.classify(this.props.project));
-      this.config.set('loadMethod', this.props.loadMethod);
+      this.config.set('loadMethod', loadMethod);
+      if (loadMethod === 'scriptTags') {
+        this.config.set('nameSpace', this._.classify(this.props.project));
+      }
+    }
+
+    this.mkdir('app');
+    this.template('app/index.html', 'app/index.html');
+
+    if (loadMethod === 'scriptTags') {
+      this.template('app/scripts/app.js', 'app/scripts/app.js');
+    } else if (loadMethod === 'AMD') {
+      this.template('app/scripts/app-amd.js', 'app/scripts/app.js');
+      this.template('app/scripts/main.js', 'app/scripts/main.js');
     }
   },
 
@@ -139,6 +147,8 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
     this.copy('gitignore', '.gitignore');
     this.copy('gitattributes', '.gitattributes');
     this.copy('jshintrc', '.jshintrc');
+    this.template('_package.json', 'package.json');
+    this.template('_bower.json', 'bower.json');
     this.template('Gruntfile.js', 'Gruntfile.js');
   },
 

@@ -4,7 +4,8 @@
   "dependencies": {<% if (includejQuery) { %>
     "jQuery": "~1.11.1", <% } %><% if (includeModernizr) { %>
     "modernizr": "~2.8.2", <% } %>
-    "ractive": "~0.5.5"
+    "ractive": "~0.5.5"<% if (loadMethod === 'AMD') { %>,
+    "requirejs-ractive": "~0.1.5" <% } %>
   }
 }
 

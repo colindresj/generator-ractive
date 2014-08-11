@@ -2,16 +2,20 @@
 
 var yeoman = require('yeoman-generator'),
     chalk = require('chalk'),
-    inject = require('../lib/inject-script-tag'),
+    inject = require('../lib/inject-script-tag').bind(this),
     RactiveGenerator;
 
 RactiveGenerator = yeoman.generators.NamedBase.extend({
   init: function () {
-    this.nameSpace = this.config.get('nameSpace');
-    this.template('ractive.js', 'app/scripts/ractives/' + this.name + '.js');
+    var loadMethod = this.config.get('loadMethod');
 
-    if (this.config.get('loadMethod') === 'scriptTags') {
-      inject.call(this, 'ractive');
+    if (loadMethod === 'scriptTags') {
+      this.nameSpace = this.config.get('nameSpace');
+      this.template('ractive.js', 'app/scripts/ractives/' + this.name + '.js');
+      inject('ractive');
+    } else if (loadMethod == 'AMD') {
+      this.template('ractive-amd.js', 'app/scripts/ractives/' + this.name + '.js');
+      this.copy('ractive-amd.html', 'app/scripts/ractives/' + this.name + '.html');
     }
   },
   testFiles: function () {

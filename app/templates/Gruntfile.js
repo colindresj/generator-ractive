@@ -19,7 +19,14 @@ module.exports = function (grunt) {
   // Configurable paths
   var config = {
     app: 'app',
-    dist: 'dist'
+    dist: 'dist'<% if (loadMethod === 'AMD') {%>,
+    amd: {
+      paths: {
+        'amd-loader': '../../bower_components/requirejs-ractive/amd-loader',
+        rv: '../../bower_components/requirejs-ractive/rv',
+        ractive: '../../bower_components/ractive/ractive'
+      }<% } %>
+    }
   };
 
   // Define the configuration for all the tasks
@@ -192,7 +199,8 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         ignorePath: /^<%= config.app %>\/|\.\.\//,
-        src: ['<%%= config.app %>/index.html']
+        src: ['<%%= config.app %>/index.html']<% if (loadMethod === 'AMD') { %>,
+        exclude: /ractive/<% } %>
       }<% if (includeSass) { %>,
       sass: {
         src: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
@@ -213,7 +221,20 @@ module.exports = function (grunt) {
           ]
         }
       }
-    },
+    },<% if (loadMethod === 'AMD') { %>
+
+    // Build the application using Require.js
+    requirejs: {
+      compile: {
+        options: {
+          out: '<%%= config.app %>/scripts/dist/app.min.js',
+          baseUrl: '<%%= config.app %>/scripts',
+          name: 'main',
+          paths: '<%%= config.amd.paths %>',
+          logLevel: 2
+        }
+      }
+    },<% } %>
 
     // Reads HTML for usemin blocks to enable smart builds that automatically
     // concat, minify and revision files. Creates configurations in memory so

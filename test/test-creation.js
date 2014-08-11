@@ -23,6 +23,7 @@ describe('yo ractive', function () {
         'appPath': 'app',
         'project': 'mock-project',
         'router': false,
+        'loadMethod': 'scriptTags',
         'includeSass': false,
         'includeModernizr': false,
         'includejQuery': false
