@@ -19,14 +19,7 @@ module.exports = function (grunt) {
   // Configurable paths
   var config = {
     app: 'app',
-    dist: 'dist'<% if (loadMethod === 'AMD') {%>,
-    amd: {
-      paths: {
-        'amd-loader': '../../bower_components/requirejs-ractive/amd-loader',
-        rv: '../../bower_components/requirejs-ractive/rv',
-        ractive: '../../bower_components/ractive/ractive'
-      }<% } %>
-    }
+    dist: 'dist'
   };
 
   // Define the configuration for all the tasks
@@ -114,7 +107,14 @@ module.exports = function (grunt) {
             '!<%%= config.dist %>/.git*'
           ]
         }]
-      },
+      },<% if (loadMethod === 'AMD') { %>
+      requirejs: {
+        dot: true,
+        src: [
+          '<%%= config.dist %>/**/*.js',
+          '!<%%= config.dist %>/scripts/main.js'
+        ]
+      },<% } %>
       server: '.tmp'
     },
 
@@ -227,10 +227,17 @@ module.exports = function (grunt) {
     requirejs: {
       compile: {
         options: {
-          out: '<%%= config.app %>/scripts/dist/app.min.js',
+          almond: true,
+          replaceRequireScript: [{
+            files: ['<%%= config.dist %>/index.html'],
+            module: 'main'
+          }],
+          modules: [{name: 'main'}],
+          mainConfigFile: '<%%= config.app %>/scripts/main.js',
+          dir: '<%%= config.dist %>/scripts',
           baseUrl: '<%%= config.app %>/scripts',
-          name: 'main',
-          paths: '<%%= config.amd.paths %>',
+          optimize: 'none',
+          useStrict: true,
           logLevel: 2
         }
       }
@@ -311,7 +318,7 @@ module.exports = function (grunt) {
     //       ]
     //     }
     //   }
-    // },
+    <% if (loadMethod === 'scriptTags') { %>// },
     // uglify: {
     //   dist: {
     //     files: {
@@ -323,7 +330,7 @@ module.exports = function (grunt) {
     // },
     // concat: {
     //   dist: {}
-    // },
+    // },<% } %>
 
     // Copies remaining files to places other tasks can use
     copy: {
@@ -435,10 +442,12 @@ module.exports = function (grunt) {
     'concurrent:dist',
     'autoprefixer',
     'concat',
-    'cssmin',
-    'uglify',
+    'cssmin',<% if (loadMethod === 'scriptTags') { %>
+    'uglify',<% } %>
     'copy:dist',<% if (includeModernizr) { %>
-    'modernizr',<% } %>
+    'modernizr',<% } if (loadMethod === 'AMD') { %>
+    'requirejs',
+    'clean:requirejs',<% } %>
     'rev',
     'usemin',
     'htmlmin'

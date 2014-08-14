@@ -22,7 +22,8 @@
   "predef": [
     "before",
     "beforeEach",
-    "describe",
+    "describe",<% if (loadMethod === 'AMD') { %>
+    "define",<% } %>
     "expect",
     "it"
   ]

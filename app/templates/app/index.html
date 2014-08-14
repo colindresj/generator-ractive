@@ -30,20 +30,18 @@
       <h1>Hello, and welcome to Ractive.js</h1>
       <h3>Brought to you by <code>generator-ractive</code></h3>
     </div>
-
+    <% if (loadMethod === 'scriptTags') { %>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js scripts/app.js -->
-    <% if (loadMethod === 'scriptTags') { %>
     <script src="scripts/app.js"></script>
     <!-- generator:ractive script -->
-    <% } else if (loadMethod === 'AMD') {%>
-    <script data-main="dist/app.min.js" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.min.js"></script>
-    <% } %>
     <!-- endbuild -->
-    <% if (!options['skip-analytics']) { %>
+    <% } else if (loadMethod === 'AMD') { %>
+    <script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
+    <% } if (!options['skip-analytics']) { %>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

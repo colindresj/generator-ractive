@@ -146,7 +146,7 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
     this.copy('editorconfig', '.editorconfig');
     this.copy('gitignore', '.gitignore');
     this.copy('gitattributes', '.gitattributes');
-    this.copy('jshintrc', '.jshintrc');
+    this.template('jshintrc', '.jshintrc');
     this.template('_package.json', 'package.json');
     this.template('_bower.json', 'bower.json');
     this.template('Gruntfile.js', 'Gruntfile.js');
