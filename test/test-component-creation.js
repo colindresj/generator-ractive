@@ -17,6 +17,12 @@ describe('yo ractive:component', function () {
         '../../component',
       ], [componentName], {});
 
+      helpers.stub(component.config, 'get', function (key) {
+        if (key === 'loadMethod') {
+          return 'scriptTags';
+        }
+      });
+
       done();
     });
   });
@@ -37,7 +43,7 @@ describe('yo ractive:component', function () {
   it('should give the component the passed in name', function (done) {
     component.run([], function () {
       helpers.assertFileContent('app/scripts/components/' + componentName + '.js',
-        new RegExp('Ractive.components.' + componentName + ' = Ractive.extend', 'i')
+        new RegExp('var ' + component._.classify(componentName) + ' = Ractive.extend', 'i')
       );
 
       done();
@@ -47,7 +53,7 @@ describe('yo ractive:component', function () {
   it('should give the component template the passed in name', function (done) {
     component.run([], function () {
       helpers.assertFileContent('app/scripts/components/' + componentName + '.js',
-        new RegExp('template: \'component/' + componentName + '-template\'', 'i')
+        new RegExp('template: \'#component/' + componentName + '-template\'', 'i')
       );
 
       done();

@@ -13,8 +13,9 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
-  // Load grunt tasks automatically
-  require('load-grunt-tasks')(grunt);
+  // Load grunt tasks automatically<% if (loadMethod === 'scriptTags' || loadMethod === 'AMD' && testFramework === 'mocha') { %>
+  require('load-grunt-tasks')(grunt);<% } else if (loadMethod === 'AMD' && testFramework === 'jasmine') { %>
+  require('load-grunt-tasks')(grunt, { pattern: ['grunt-*', '!grunt-template-jasmine-requirejs'] });<% } %>
 
   // Configurable paths
   var config = {
@@ -88,6 +89,20 @@ module.exports = function (grunt) {
           }
         }
       },
+      test: {
+        options: {
+          open: false,
+          port: 9001,
+          middleware: function (connect) {
+            return [
+              connect.static('.tmp'),
+              connect.static('test'),
+              connect().use('/bower_components', connect.static('./bower_components')),
+              connect.static(config.app)
+            ];
+          }
+        }
+      },
       dist: {
         options: {
           base: '<%%= config.dist %>',
@@ -133,12 +148,12 @@ module.exports = function (grunt) {
     },<% if (testFramework === 'mocha') { %>
 
     // Mocha testing framework configuration options
-    mochaTest: {
+    mocha: {
       test: {
         options: {
-          reporter: 'spec'
-        },
-        src: 'test/{,*/}*.js'
+          run: <%= loadMethod === 'scriptTags' %>,
+          urls: ['http://<%%= connect.options.hostname %>:<%%= connect.test.options.port %>/spec_runner.html']
+        }
       }
     },<% } else if (testFramework === 'jasmine') { %>
 
@@ -146,7 +161,14 @@ module.exports = function (grunt) {
     jasmine: {
       all: {
         options: {
-          specs: 'test/{,*/}*.js'
+          specs: 'test/{,*/}*.js'<% if (loadMethod === 'AMD') { %>,
+          template: require('grunt-template-jasmine-requirejs'),
+          templateOptions: {
+            requireConfigFile: '<%%= config.app %>/scripts/main.js',
+            requireConfig: {
+              baseUrl: '<%%= config.app %>/scripts',
+            }
+          }<% } %>
         }
       }
     },<% } if (includeSass) { %>
@@ -430,7 +452,8 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
-      <% if (testFramework === 'mocha') { %>'mochaTest'<% }
+      <% if (testFramework === 'mocha') { %>'connect:test',
+      'mocha'<% }
       else if (testFramework === 'jasmine') { %>'jasmine'<% } %>
     ]);
   });

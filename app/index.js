@@ -153,16 +153,29 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
   },
 
   testfiles: function () {
+    var testFramework = this.testFramework,
+        loadMethod = this.loadMethod;
+
     this.testConfig = {
-      assertString: this.testFramework === 'mocha' ? 'should assert something' :
+      assertString: testFramework === 'mocha' ? 'should assert something' :
         'asserts something',
-      expectation: this.testFramework === 'mocha' ? 'expect(true).to.be.true;' :
+      expectation: testFramework === 'mocha' ? 'expect(true).to.be.true;' :
         'expect(true).toBe(true);'
+    };
+
+    if (testFramework === 'mocha') {
+      this.template('test/spec_runner.html', 'test/spec_runner.html');
     }
 
-    this.template('test/app_test.js', 'test/app_test.js');
+    if (loadMethod === 'scriptTags') {
+      this.template('test/app_test.js', 'test/app_test.js');
+    } else if (loadMethod === 'AMD') {
+      this.template('test/spec_main.js', 'test/spec_main.js');
+      this.template('test/app_test-amd.js', 'test/app_test.js');
+    }
+
     if (!this.options['skip-yo-rc']) {
-      this.config.set('testFramework', this.testFramework);
+      this.config.set('testFramework', testFramework);
     }
   }
 });

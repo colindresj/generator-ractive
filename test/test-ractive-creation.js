@@ -64,7 +64,7 @@ describe('yo ractive:ractive', function () {
   it('should give the ractive template the passed in name', function (done) {
     ractive.run([], function () {
       helpers.assertFileContent('app/scripts/ractives/' + ractiveName + '.js',
-        new RegExp('template: \'' + ractiveName + '-template\'', 'i')
+        new RegExp('template: \'#' + ractiveName + '-template\'', 'i')
       );
 
       done();

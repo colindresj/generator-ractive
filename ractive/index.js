@@ -2,12 +2,12 @@
 
 var yeoman = require('yeoman-generator'),
     chalk = require('chalk'),
-    inject = require('../lib/inject-script-tag').bind(this),
     RactiveGenerator;
 
 RactiveGenerator = yeoman.generators.NamedBase.extend({
   init: function () {
-    var loadMethod = this.config.get('loadMethod');
+    var loadMethod = this.loadMethod = this.config.get('loadMethod'),
+        inject = require('../lib/inject-script-tag').bind(this);
 
     if (loadMethod === 'scriptTags') {
       this.nameSpace = this.config.get('nameSpace');
@@ -19,15 +19,21 @@ RactiveGenerator = yeoman.generators.NamedBase.extend({
     }
   },
   testFiles: function () {
-    this.testFramework = this.config.get('testFramework');
+    var testFramework = this.testFramework = this.config.get('testFramework'),
+        loadMethod = this.loadMethod;
+
     this.testConfig = {
-      assertString: this.testFramework === 'mocha' ? 'should assert something' :
+      assertString: testFramework === 'mocha' ? 'should assert something' :
         'asserts something',
-      expectation: this.testFramework === 'mocha' ? 'expect(true).to.be.true;' :
+      expectation: testFramework === 'mocha' ? 'expect(true).to.be.true;' :
         'expect(true).toBe(true);'
     }
 
-    this.template('ractive_test.js', 'test/ractives/' + this.name + '_test.js');
+    if (loadMethod === 'scriptTags') {
+      this.template('ractive_test.js', 'test/ractives/' + this.name + '_test.js');
+    } else if (loadMethod === 'AMD') {
+      this.template('ractive_test-amd.js', 'test/ractives/' + this.name + '_test.js');
+    }
   }
 });
 
