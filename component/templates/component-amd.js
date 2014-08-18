@@ -1,13 +1,13 @@
 define([
   'ractive',
   'rv!components/<%= _.slugify(name) %>'
-], function (Ractive, <%= _.slugify(name) %>Template) {
+], function (Ractive, <%= _.camelize(name) %>Template) {
   'use strict';
 
   return {
     init: function () {
       var <%= _.classify(name) %> = Ractive.extend({
-        template: <%= _.slugify(name) %>Template,
+        template: <%= _.camelize(name) %>Template,
         isolated: <%= isIsolated %>,
         beforeInit: function () {},
         init: function () {},
