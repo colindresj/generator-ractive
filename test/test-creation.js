@@ -40,7 +40,8 @@ describe('yo ractive', function () {
         '.gitattributes',
         '.gitignore',
         '.jshintrc',
-        'Gruntfile.js'
+        'Gruntfile.js',
+        'app/styles/main.css'
       ];
 
       ractive.run({}, function () {

@@ -140,6 +140,15 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
       this.template('app/scripts/app-amd.js', 'app/scripts/app.js');
       this.template('app/scripts/main.js', 'app/scripts/main.js');
     }
+
+    if (this.includeSass) {
+      this.template('app/styles/app.scss', 'app/styles/app.scss');
+      this.template('app/styles/_defaults.scss', 'app/styles/_defaults.scss');
+      this.template('app/styles/_vendor.scss', 'app/styles/_vendor.scss');
+      this.template('app/styles/_layout.scss', 'app/styles/_layout.scss');
+    } else {
+      this.template('app/styles/app.css');
+    }
   },
 
   projectfiles: function () {
