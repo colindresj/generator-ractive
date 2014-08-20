@@ -67,6 +67,7 @@ Creates a component file, component spec file and, if using AMD, component templ
 - Headless unit testing with Mocha or Jasmine
 - Optional Modernizr
 - Optional jQuery
+- Optional Normalize CSS
 
 ### AMD
 Supports [Require.js](http://requirejs.org/) out of the box. Just select the AMD

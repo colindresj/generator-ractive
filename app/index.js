@@ -86,6 +86,10 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
         name: 'jQuery',
         value: 'includejQuery',
         checked: false
+      }, {
+        name: 'Normalize CSS',
+        value: 'includeNormalize',
+        checked: false
       }],
     }, {
       when: function (answers) {
@@ -110,6 +114,7 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
       props = _.extend(this.props, props);
       features = props.features;
 
+      this.includeNormalize = hasFeature('includeNormalize');
       this.includeModernizr = hasFeature('includeModernizr');
       this.includejQuery = hasFeature('includejQuery');
       this.includeSass = hasFeature('includeSass');

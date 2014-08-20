@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "dependencies": {<% if (includejQuery) { %>
     "jQuery": "~1.11.1", <% } if (includeModernizr) { %>
-    "modernizr": "~2.8.2", <% } %>
+    "modernizr": "~2.8.2", <% } if (includeNormalize) { if (!includeSass) { %>
+    "normalize-css": "~3.0.1", <% } else { %>
+    "normalize-scss": "~3.0.1", <% }} %>
     "ractive": "~0.5.5"<% if (loadMethod === 'AMD') { %>,
     "requirejs-ractive": "~0.1.5",
     "requirejs": "~2.1.14" <% } %>
