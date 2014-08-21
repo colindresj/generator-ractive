@@ -1,4 +1,4 @@
-# generator-ractive [![Build Status](https://secure.travis-ci.org/colindresj/generator-ractive.png?branch=master)](https://travis-ci.org/colindresj/generator-ractive)
+# generator-ractive [![Build Status](https://secure.travis-ci.org/colindresj/generator-ractive.svg?branch=master)](https://travis-ci.org/colindresj/generator-ractive)
 
 > Yeoman generator for Ractive.js
 
@@ -78,10 +78,15 @@ option after initializing the generator. The production file is loaded with
 [Router.js](https://github.com/tildeio/router.js/) can easily be included when
 initializing the generator.
 
-## License
-MIT
-
 ## Coming Soon
 - Director and Page.js routing options
 - Browserify support
 - Easy deployment to Heroku
+
+## Changelog
+#### 0.1.0 (2014-08-20)
+- Initial release
+
+## License
+MIT
+
