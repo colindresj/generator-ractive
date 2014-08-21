@@ -1,13 +1,18 @@
 {
   "name": "generator-ractive",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Yeoman generator for Ractive.js",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "colindresj/generator-ractive",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/colindresj/generator-ractive.git"
+  },
+  "homepage": "https://github.com/colindresj/generator-ractive",
+  "bugs": "https://github.com/colindresj/generator-ractive/issues",
   "author": {
     "name": "JC",
-    "email": "",
+    "email": "j@colindres.me",
     "url": "https://github.com/colindresj"
   },
   "engines": {
