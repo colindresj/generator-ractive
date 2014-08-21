@@ -1,7 +1,21 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html,
 body {
+  height: 100%;
+}
+
+body {
+  align-items: center;
   background: #fafafa;
   color: #333;
+  display: flex;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  justify-content: center;
 }
 
 .browsehappy {
@@ -9,4 +23,30 @@ body {
   color: #000;
   margin: 0.2em 0;
   padding: 0.2em 0;
+}
+
+.welcome {
+  background: #eee;
+  padding: 40px 60px;
+  text-align: center;
+}
+
+.diamond-container {
+  margin: 40px 0;
+}
+
+.diamond {
+  fill: #333333;
+  margin: 100px 0;
+}
+
+.credit {
+  font-size: 14px;
+  font-family: serif;
+  letter-spacing: 2px;
+  font-style: italic;
+}
+
+.credit span {
+  display: block;
 }
