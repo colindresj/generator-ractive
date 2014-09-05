@@ -354,4 +354,75 @@ describe('yo ractive', function () {
       })
     });
   });
+
+  describe('when using a router', function () {
+    describe('when choosing Router.js', function () {
+      beforeEach(function (done) {
+        helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
+          if (err) {
+            return done(err);
+          }
+
+          ractive = helpers.createGenerator('ractive:app', [
+            '../../app'
+          ], false, {
+            'skip-install': true,
+            'skip-welcome-message': true,
+            'skip-yo-rc': true
+          });
+
+          helpers.mockPrompt(ractive, {
+            'appPath': 'app',
+            'project': 'mock-project',
+            'router': true,
+            'includedRouter': 'routerjs'
+          });
+
+          done();
+        });
+      });
+
+      it('includes Router.js', function (done) {
+        ractive.run({}, function () {
+          helpers.assertFileContent('bower.json', /router.js/);
+
+          done();
+        })
+      });
+    });
+    describe('when choosing Router.js', function () {
+      beforeEach(function (done) {
+        helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
+          if (err) {
+            return done(err);
+          }
+
+          ractive = helpers.createGenerator('ractive:app', [
+            '../../app'
+          ], false, {
+            'skip-install': true,
+            'skip-welcome-message': true,
+            'skip-yo-rc': true
+          });
+
+          helpers.mockPrompt(ractive, {
+            'appPath': 'app',
+            'project': 'mock-project',
+            'router': true,
+            'includedRouter': 'pagejs'
+          });
+
+          done();
+        });
+      });
+
+      it('includes Page.js', function (done) {
+        ractive.run({}, function () {
+          helpers.assertFileContent('bower.json', /page/);
+
+          done();
+        })
+      });
+    });
+  });
 });

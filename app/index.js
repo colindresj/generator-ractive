@@ -8,7 +8,6 @@ var util = require('util'),
     _ = require('lodash'),
     RactiveProjectGenerator;
 
-
 RactiveProjectGenerator = yeoman.generators.Base.extend({
   constructor: function () {
     yeoman.generators.Base.apply(this, arguments);
@@ -53,8 +52,24 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
     }, {
       type: 'confirm',
       name: 'router',
-      message: 'Would you like to include Router.js?',
+      message: 'Would you like to include a client-side router?',
       default: false
+    }, {
+      when: function (answers) {
+        return answers.router;
+      },
+      type: 'list',
+      name: 'includedRouter',
+      message: 'What router would you like to use?',
+      choices: [{
+        name: 'Router.js',
+        value: 'routerjs'
+      },
+      {
+        name: 'Page.js',
+        value: 'pagejs'
+      }],
+      default: 'routerjs'
     }, {
       type: 'list',
       name: 'loadMethod',
@@ -121,6 +136,10 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
       this.includeLibSass = props.libsass;
       this.includeRubySass = !props.libsass;
       this.loadMethod = props.loadMethod;
+
+      if (props.router) {
+        this.includedRouter = props.includedRouter;
+      }
 
       done();
     }.bind(this));
