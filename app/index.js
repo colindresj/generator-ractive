@@ -68,6 +68,10 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
       {
         name: 'Page.js',
         value: 'pagejs'
+      },
+      {
+        name: 'Director.js',
+        value: 'directorjs'
       }],
       default: 'routerjs'
     }, {

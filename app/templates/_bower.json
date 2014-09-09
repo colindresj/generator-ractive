@@ -1,7 +1,8 @@
 {
   "name": "<%= _.slugify(props.project) %>",
   "version": "0.0.0",
-  "dependencies": {<% if (includejQuery) { %>
+  "dependencies": {<% if (props.router && includedRouter === 'directorjs') { %>
+    "director": "~1.2.2", <% } if (includejQuery) { %>
     "jQuery": "~1.11.1", <% } if (includeModernizr) { %>
     "modernizr": "~2.8.2", <% } if (includeNormalize) { if (!includeSass) { %>
     "normalize-css": "~3.0.1", <% } else { %>

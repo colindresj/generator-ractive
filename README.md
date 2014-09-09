@@ -79,7 +79,6 @@ option after initializing the generator. The production file is loaded with
 initializing the generator.
 
 ## Coming Soon
-- Director routing option
 - Browserify support
 - Easy deployment to Heroku
 
