@@ -63,17 +63,17 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
       message: 'What router would you like to use?',
       choices: [{
         name: 'Router.js',
-        value: 'routerjs'
+        value: 'router.js'
       },
       {
         name: 'Page.js',
-        value: 'pagejs'
+        value: 'page'
       },
       {
         name: 'Director.js',
-        value: 'directorjs'
+        value: 'director'
       }],
-      default: 'routerjs'
+      default: 'router.js'
     }, {
       type: 'list',
       name: 'loadMethod',
@@ -84,9 +84,6 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
       }, {
         name: 'AMD (Require.js)',
         value: 'AMD'
-      }, {
-        name: 'Browserify',
-        value: 'Browserify'
       }],
       default: 0
     }, {
@@ -142,7 +139,14 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
       this.loadMethod = props.loadMethod;
 
       if (props.router) {
+        var mainPaths = {
+          'router.js': 'router.js',
+          'page': 'index.js',
+          'director': 'build/director.js'
+        }
+
         this.includedRouter = props.includedRouter;
+        this.includedRouterMainPath = mainPaths[props.includedRouter];
       }
 
       done();

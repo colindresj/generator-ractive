@@ -58,16 +58,15 @@
       </div>
       <p class="credit">Brought to you by <span>generator-ractive</span></p>
     </div>
-    <% if (loadMethod === 'scriptTags') { %>
+
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- endbower -->
-    <!-- endbuild -->
+    <!-- endbuild --><% if (loadMethod === 'scriptTags') { %>
     <!-- build:js scripts/app.js -->
     <script src="scripts/app.js"></script>
     <!-- generator:ractive script -->
-    <!-- endbuild -->
-    <% } else if (loadMethod === 'AMD') { %>
+    <!-- endbuild --><% } else if (loadMethod === 'AMD') { %>
     <script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
     <% } if (!options['skip-analytics']) { %>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

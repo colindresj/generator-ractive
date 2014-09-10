@@ -381,7 +381,7 @@ describe('yo ractive', function () {
             'appPath': 'app',
             'project': 'mock-project',
             'router': true,
-            'includedRouter': 'routerjs'
+            'includedRouter': 'router.js'
           });
 
           done();
@@ -395,6 +395,16 @@ describe('yo ractive', function () {
           done();
         })
       });
+
+      it('sets the main path override', function (done) {
+        ractive.run({}, function () {
+          helpers.assertFileContent('bower.json', new RegExp(
+            ractive.includedRouterMainPath
+          ));
+
+          done();
+        })
+      });
     });
 
     describe('when choosing Page.js', function () {
@@ -404,7 +414,7 @@ describe('yo ractive', function () {
             'appPath': 'app',
             'project': 'mock-project',
             'router': true,
-            'includedRouter': 'pagejs'
+            'includedRouter': 'page'
           });
 
           done();
@@ -418,6 +428,16 @@ describe('yo ractive', function () {
           done();
         })
       });
+
+      it('sets the main path override', function (done) {
+        ractive.run({}, function () {
+          helpers.assertFileContent('bower.json', new RegExp(
+            ractive.includedRouterMainPath
+          ));
+
+          done();
+        })
+      });
     });
 
     describe('when choosing Director.js', function () {
@@ -427,7 +447,7 @@ describe('yo ractive', function () {
             'appPath': 'app',
             'project': 'mock-project',
             'router': true,
-            'includedRouter': 'directorjs'
+            'includedRouter': 'director'
           });
 
           done();
@@ -437,6 +457,16 @@ describe('yo ractive', function () {
       it('includes Director.js', function (done) {
         ractive.run({}, function () {
           helpers.assertFileContent('bower.json', /director/);
+
+          done();
+        })
+      });
+
+      it('sets the main path override', function (done) {
+        ractive.run({}, function () {
+          helpers.assertFileContent('bower.json', new RegExp(
+            ractive.includedRouterMainPath
+          ));
 
           done();
         })

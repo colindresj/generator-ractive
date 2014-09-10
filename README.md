@@ -74,9 +74,12 @@ Supports [Require.js](http://requirejs.org/) out of the box. Just select the AMD
 option after initializing the generator. The production file is loaded with
 [Almond](https://github.com/jrburke/almond).
 
-### Router.js
-[Router.js](https://github.com/tildeio/router.js/) can easily be included when
-initializing the generator.
+### Routing
+Three optional client-side routers can be included when initializing the generator.
+
+- [Router.js](https://github.com/tildeio/router.js/)
+- [Page](https://github.com/visionmedia/page.js/)
+- [Director](https://github.com/flatiron/director)
 
 ## Coming Soon
 - Browserify support

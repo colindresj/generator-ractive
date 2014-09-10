@@ -1,6 +1,6 @@
 define([
   'ractive'
-], function (Ractive) {
+], function () {
   'use strict';
 
   return {
