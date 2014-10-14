@@ -52,10 +52,10 @@ describe('yo ractive:ractive', function () {
       });
     });
 
-    it('should give the ractive element the passed in name', function (done) {
+    it('should give the ractive element the passed in name as a class', function (done) {
       ractive.run([], function () {
         helpers.assertFileContent('app/scripts/ractives/' + ractiveName + '.js',
-          new RegExp('el: \'' + ractiveName + '\'', 'i')
+          new RegExp('el: \'.' + ractiveName + '\'', 'i')
         );
 
         done();

@@ -2,7 +2,7 @@
   'use strict';
 
   var <%= _.camelize(name) %> = new Ractive({
-    el: '<%= _.slugify(name) %>',
+    el: '.<%= _.slugify(name) %>',
     template: '#<%= _.slugify(name) %>-template',
     data: {}
   });

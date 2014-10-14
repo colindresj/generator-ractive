@@ -7,7 +7,7 @@ define([
   return {
     init: function () {
       new Ractive({
-        el: '<%= _.slugify(name) %>',
+        el: '.<%= _.slugify(name) %>',
         template: <%= _.camelize(name) %>Template,
         data: {}
       });
