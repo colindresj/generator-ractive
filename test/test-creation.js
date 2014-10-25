@@ -355,6 +355,48 @@ describe('yo ractive', function () {
     });
   });
 
+  describe('when using Browserify', function() {
+    beforeEach(function (done) {
+      helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
+        if (err) {
+          return done(err);
+        }
+
+        ractive = helpers.createGenerator('ractive:app', [
+          '../../app',
+        ], false, {
+          'skip-install': true,
+          'skip-welcome-message': true,
+          'skip-yo-rc': true
+        });
+
+        helpers.mockPrompt(ractive, {
+          'appPath': 'app',
+          'project': 'mock-project',
+          'loadMethod': 'browserify'
+        });
+
+        done();
+      });
+    });
+
+    it('includes Browserify', function (done) {
+      ractive.run({}, function () {
+        helpers.assertFileContent('package.json', /grunt-browserify/i);
+
+        done();
+      });
+    });
+
+    it('include ractify', function (done) {
+      ractive.run({}, function () {
+        helpers.assertFileContent('package.json', /ractify/i);
+
+        done();
+      });
+    });
+  });
+
   describe('when using a router', function () {
     beforeEach(function (done) {
       helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {

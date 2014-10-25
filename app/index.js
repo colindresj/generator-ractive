@@ -84,6 +84,9 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
       }, {
         name: 'AMD (Require.js)',
         value: 'AMD'
+      }, {
+        name: 'Browserify',
+        value: 'browserify'
       }],
       default: 0
     }, {
