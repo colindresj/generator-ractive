@@ -174,6 +174,8 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
     } else if (loadMethod === 'AMD') {
       this.template('app/scripts/app-amd.js', 'app/scripts/app.js');
       this.template('app/scripts/main.js', 'app/scripts/main.js');
+    } else if (loadMethod === 'browserify') {
+      this.template('app/scripts/app-browserify.js', 'app/scripts/app.js');
     }
 
     if (this.includeSass) {

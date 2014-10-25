@@ -380,15 +380,37 @@ describe('yo ractive', function () {
       });
     });
 
+    it('creates the expected JavaScript files', function (done) {
+      var expected = [
+        'app/scripts/app.js',
+      ];
+
+      ractive.run({}, function () {
+        helpers.assertFile(expected);
+
+        done();
+      });
+    });
+
     it('includes Browserify', function (done) {
       ractive.run({}, function () {
+        helpers.assertFileContent('package.json', /browserify/i);
         helpers.assertFileContent('package.json', /grunt-browserify/i);
 
         done();
       });
     });
 
-    it('include ractify', function (done) {
+    it('includes the npm module version of Ractive', function (done) {
+      ractive.run({}, function () {
+        helpers.assertFileContent('package.json', /ractive/i);
+        helpers.assertNoFileContent('bower.json', /ractive/i);
+
+        done();
+      });
+    });
+
+    it('include the necessary Browserify transforms', function (done) {
       ractive.run({}, function () {
         helpers.assertFileContent('package.json', /ractify/i);
 

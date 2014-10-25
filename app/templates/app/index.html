@@ -58,7 +58,9 @@
       </div>
       <p class="credit">Brought to you by <span>generator-ractive</span></p>
     </div>
-
+    <% if (loadMethod === 'browserify') { %>
+    <script src="scripts/app.js"></script>
+    <% } else { %>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- endbower -->
@@ -68,7 +70,7 @@
     <!-- generator:ractive script -->
     <!-- endbuild --><% } else if (loadMethod === 'AMD') { %>
     <script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
-    <% } if (!options['skip-analytics']) { %>
+    <% } } if (!options['skip-analytics']) { %>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

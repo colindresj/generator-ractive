@@ -15,7 +15,8 @@ module.exports = function (grunt) {
 
   // Load grunt tasks automatically<% if (loadMethod === 'scriptTags' || loadMethod === 'AMD' && testFramework === 'mocha') { %>
   require('load-grunt-tasks')(grunt);<% } else if (loadMethod === 'AMD' && testFramework === 'jasmine') { %>
-  require('load-grunt-tasks')(grunt, { pattern: ['grunt-*', '!grunt-template-jasmine-requirejs'] });<% } %>
+  require('load-grunt-tasks')(grunt, { pattern: ['grunt-*', '!grunt-template-jasmine-requirejs'] });<% } else { %>
+  require('load-grunt-tasks')(grunt);<% } %>
 
   // Configurable paths
   var config = {
@@ -261,6 +262,18 @@ module.exports = function (grunt) {
           optimize: 'none',
           useStrict: true,
           logLevel: 2
+        }
+      }
+    },<% } if (loadMethod == 'browserify') { %>
+
+    // Build the application using Browserify
+    browserify: {
+      dist: {
+        files: {
+          '<%%= config.dist %>/scripts/app.js': '<%%= config.app %>/scripts/app.js',
+        },
+        options: {
+          transform: ['ractify']
         }
       }
     },<% } %>
