@@ -107,5 +107,64 @@ describe('yo ractive:ractive', function () {
         done();
       })
     });
+
+    it('creates the template file', function (done) {
+      ractive.run({}, function () {
+        helpers.assertFile('app/scripts/ractives/' + ractiveName + '.html');
+      });
+
+      done();
+    });
+  });
+
+  describe('when using Browserify', function() {
+    beforeEach(function (done) {
+      helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
+        if (err) {
+          return done(err);
+        }
+
+        ractive = helpers.createGenerator('ractive:ractive', [
+          '../../app',
+          '../../ractive',
+        ], [ractiveName], {});
+
+        helpers.stub(ractive.config, 'get', function (key) {
+          if (key === 'loadMethod') {
+            return 'browserify';
+          }
+        });
+
+        done();
+      });
+    });
+
+    it('requires the ractive runtime module', function (done) {
+      ractive.run({}, function () {
+        helpers.assertFileContent('app/scripts/ractives/' + ractiveName + '.js',
+          /var ractive = require\('ractive\/ractive.runtime'\);/i
+        );
+      });
+
+      done();
+    });
+
+    it('requires the ractive template', function (done) {
+      ractive.run({}, function () {
+        helpers.assertFileContent('app/scripts/ractives/' + ractiveName + '.js',
+          new RegExp("('./" + ractiveName + ".ract')")
+        );
+
+        done();
+      });
+    });
+
+    it('creates the template file', function (done) {
+      ractive.run({}, function () {
+        helpers.assertFile('app/scripts/ractives/' + ractiveName + '.ract');
+      });
+
+      done();
+    });
   });
 });

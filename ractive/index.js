@@ -13,9 +13,12 @@ RactiveGenerator = yeoman.generators.NamedBase.extend({
       this.nameSpace = this.config.get('nameSpace');
       this.template('ractive.js', 'app/scripts/ractives/' + this.name + '.js');
       inject('ractive');
-    } else if (loadMethod == 'AMD') {
+    } else if (loadMethod === 'AMD') {
       this.template('ractive-amd.js', 'app/scripts/ractives/' + this.name + '.js');
-      this.copy('ractive-amd.html', 'app/scripts/ractives/' + this.name + '.html');
+      this.copy('ractive.html', 'app/scripts/ractives/' + this.name + '.html');
+    } else if (loadMethod === 'browserify') {
+      this.template('ractive-browserify.js', 'app/scripts/ractives/' + this.name + '.js');
+      this.template('ractive.html', 'app/scripts/ractives/' + this.name + '.ract');
     }
   },
   testFiles: function () {
