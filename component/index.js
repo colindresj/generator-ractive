@@ -33,7 +33,10 @@ ComponentGenerator = yeoman.generators.Base.extend({
       inject.call(this, 'component');
     } else if (loadMethod === 'AMD') {
       this.template('component-amd.js', 'app/scripts/components/' + this.name + '.js');
-      this.copy('component-amd.html', 'app/scripts/components/' + this.name + '.html');
+      this.copy('component.html', 'app/scripts/components/' + this.name + '.html');
+    } else if (loadMethod === 'browserify') {
+      this.template('component-browserify.js', 'app/scripts/components/' + this.name + '.js');
+      this.template('component.html', 'app/scripts/components/' + this.name + '.ract');
     }
   },
   testFiles: function () {

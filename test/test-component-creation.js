@@ -132,5 +132,64 @@ describe('yo ractive:component', function () {
         done();
       })
     });
+
+    it('creates the template file', function (done) {
+      component.run({}, function () {
+        helpers.assertFile('app/scripts/components/' + componentName + '.html');
+      });
+
+      done();
+    });
+  });
+
+  describe('when using Browserify', function () {
+    beforeEach(function (done) {
+      helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
+        if (err) {
+          return done(err);
+        }
+
+        component = helpers.createGenerator('ractive:component', [
+          '../../app',
+          '../../component',
+        ], [componentName], {});
+
+        helpers.stub(component.config, 'get', function (key) {
+          if (key === 'loadMethod') {
+            return 'browserify';
+          }
+        });
+
+        done();
+      });
+    });
+
+    it('requires the ractive runtime module', function (done) {
+      component.run({}, function () {
+        helpers.assertFileContent('app/scripts/components/' + componentName + '.js',
+          /var ractive = require\('ractive\/ractive.runtime'\);/i
+        );
+      });
+
+      done();
+    });
+
+    it('requires the ractive template', function (done) {
+      component.run({}, function () {
+        helpers.assertFileContent('app/scripts/components/' + componentName + '.js',
+          new RegExp("('./" + componentName + ".ract')")
+        );
+
+        done();
+      });
+    });
+
+    it('creates the template file', function (done) {
+      component.run({}, function () {
+        helpers.assertFile('app/scripts/components/' + componentName + '.ract');
+      });
+
+      done();
+    });
   });
 });
