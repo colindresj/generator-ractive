@@ -21,6 +21,7 @@ RactiveGenerator = yeoman.generators.NamedBase.extend({
       this.template('ractive.html', 'app/scripts/ractives/' + this.name + '.ract');
     }
   },
+
   testFiles: function () {
     var testFramework = this.testFramework = this.config.get('testFramework'),
         loadMethod = this.loadMethod;

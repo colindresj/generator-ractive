@@ -17,6 +17,7 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
       type: String,
       defaults: 'mocha'
     });
+
     this.testFramework = this.options['test-framework'];
 
     this.option('skip-analytics', {
@@ -41,7 +42,6 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
   askFor: function () {
     var done = this.async(), prompts;
 
-    // Have Yeoman greet the user.
     if (!this.options['skip-welcome-message']) {
       this.log(yosay('Welcome to the marvelous Ractive generator!'));
     }
@@ -64,12 +64,10 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
       choices: [{
         name: 'Router.js',
         value: 'router.js'
-      },
-      {
+      }, {
         name: 'Page.js',
         value: 'page'
-      },
-      {
+      }, {
         name: 'Director.js',
         value: 'director'
       }],
@@ -123,9 +121,10 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
     }];
 
     this.prompt(prompts, function (props) {
-      var props, features;
+      var props, features, mainPaths;
 
       this.props = this.props || {};
+
       function hasFeature(feature) {
         return features && features.indexOf(feature) !== -1;
       }
@@ -142,7 +141,7 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
       this.loadMethod = props.loadMethod;
 
       if (props.router) {
-        var mainPaths = {
+        mainPaths = {
           'router.js': 'router.js',
           'page': 'index.js',
           'director': 'build/director.js'
@@ -161,12 +160,14 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
 
     if (!this.options['skip-yo-rc']) {
       this.config.set('loadMethod', loadMethod);
+
       if (loadMethod === 'scriptTags') {
         this.config.set('nameSpace', this._.classify(this.props.project));
       }
     }
 
     this.mkdir('app');
+
     this.template('app/index.html', 'app/index.html');
 
     if (loadMethod === 'scriptTags') {

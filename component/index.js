@@ -15,17 +15,20 @@ ComponentGenerator = yeoman.generators.Base.extend({
       type: Boolean,
       defaults: false
     });
+
     this.option('isolated', {
       desc: 'Isolate the component\'s template scope',
       type: Boolean,
       deafults: false
     });
+
     this.option('on-the-fly', {
       desc: 'Create the component on the fly by requiring it through extension',
       type: Boolean,
       defaults: false
     });
   },
+
   init: function () {
     var loadMethod = this.loadMethod = this.config.get('loadMethod');
 
@@ -54,6 +57,7 @@ ComponentGenerator = yeoman.generators.Base.extend({
       this.copy('component.html', 'app/scripts/components/' + this.name + '.ract');
     }
   },
+
   testFiles: function () {
     var testFramework = this.testFramework = this.config.get('testFramework'),
         loadMethod = this.loadMethod;
