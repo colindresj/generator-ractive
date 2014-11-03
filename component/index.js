@@ -20,12 +20,25 @@ ComponentGenerator = yeoman.generators.Base.extend({
       type: Boolean,
       deafults: false
     });
+    this.option('on-the-fly', {
+      desc: 'Create the component on the fly by requiring it through extension',
+      type: Boolean,
+      defaults: false
+    });
   },
   init: function () {
     var loadMethod = this.loadMethod = this.config.get('loadMethod');
 
     this.isGlobal = this.options['global'];
     this.isIsolated = this.options['isolated'];
+    this.onTheFly = this.options['on-the-fly'];
+
+    if (this.onTheFly && loadMethod !== 'browserify') {
+      console.warn(
+        'The on the fly option can only be used with Browserify. Invoking the' +
+        'component as if the flag was not passed.'
+      );
+    }
 
     if (loadMethod === 'scriptTags') {
       this.nameSpace = this.config.get('nameSpace');
@@ -35,8 +48,10 @@ ComponentGenerator = yeoman.generators.Base.extend({
       this.template('component-amd.js', 'app/scripts/components/' + this.name + '.js');
       this.copy('component.html', 'app/scripts/components/' + this.name + '.html');
     } else if (loadMethod === 'browserify') {
-      this.template('component-browserify.js', 'app/scripts/components/' + this.name + '.js');
-      this.template('component.html', 'app/scripts/components/' + this.name + '.ract');
+      if (!this.onTheFly) {
+        this.template('component-browserify.js', 'app/scripts/components/' + this.name + '.js');
+      }
+      this.copy('component.html', 'app/scripts/components/' + this.name + '.ract');
     }
   },
   testFiles: function () {

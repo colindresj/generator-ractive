@@ -191,5 +191,35 @@ describe('yo ractive:component', function () {
 
       done();
     });
+
+    describe('when passing the on the fly flag', function () {
+      beforeEach(function (done) {
+        component = helpers.createGenerator('ractive:component', [
+          '../../app',
+          '../../component',
+        ], [componentName], {
+          'on-the-fly': true
+        });
+
+        done();
+      });
+
+      describe('when using Browserify', function () {
+        it('only creates the template file', function (done) {
+          helpers.stub(component.config, 'get', function (key) {
+            if (key === 'loadMethod') {
+              return 'browserify';
+            }
+          });
+
+          component.run({}, function () {
+            helpers.assertFile('app/scripts/components/' + componentName + '.ract');
+            helpers.assertNoFile('app/scripts/components/' + componentName + '.js');
+          });
+
+          done();
+        });
+      });
+    });
   });
 });
