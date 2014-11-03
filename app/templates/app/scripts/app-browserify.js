@@ -1,3 +1,3 @@
 'use strict';
 
-var Ractive = require('ractive/ractive.runtime');
+require('ractive/ractive.runtime');

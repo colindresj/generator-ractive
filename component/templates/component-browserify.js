@@ -9,5 +9,5 @@ var <%= _.classify(name) %> = Ractive.extend({
   init: function () {},
   data: {}
 });
-<% if (isGlobal) { %>
-Ractive.components.<%= _.slugify(name) %> = <%= _.classify(name) %>;<% } %>
+
+<% if (isGlobal) { %>Ractive.components.<%= _.slugify(name) %><% } else { %>module.exports<% } %> = <%= _.classify(name) %>;
