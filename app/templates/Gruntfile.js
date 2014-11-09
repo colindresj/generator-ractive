@@ -35,14 +35,14 @@ module.exports = function (grunt) {
       bower: {
         files: ['bower.json'],
         tasks: ['wiredep']
-      },
+      },<% if (loadMethod !== 'browserify') { %>
       js: {
         files: ['<%%= config.app %>/scripts/{,*/}*.js'],
         tasks: ['jshint'],
         options: {
           livereload: true
         }
-      },
+      },<% } %>
       jstest: {
         files: ['test/{,*/}*.js'],
         tasks: ['test:watch']
@@ -64,7 +64,8 @@ module.exports = function (grunt) {
         },
         files: [
           '<%%= config.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
+          '.tmp/styles/{,*/}*.css',<% if (loadMethod === 'browserify') { %>
+          '.tmp/scripts/{,*/}*.js',<% } %>
           '<%%= config.app %>/images/{,*/}*'
         ]
       }
@@ -268,7 +269,11 @@ module.exports = function (grunt) {
     // Build the application using Browserify
     browserify: {
       options: {
-        transform: ['ractify']
+        transform: ['ractify'],
+        watch: true,
+        browserifyOptions: {
+          debug: true
+        }
       },
       dist: {
         files: {
