@@ -37,10 +37,10 @@ ComponentGenerator = yeoman.generators.Base.extend({
     this.onTheFly = this.options['on-the-fly'];
 
     if (this.onTheFly && loadMethod !== 'browserify') {
-      console.warn(
-        'The on the fly option can only be used with Browserify. Invoking the' +
+      this.log(chalk.yellow(
+        'The on the fly option can only be used with Browserify. Invoking the ' +
         'component as if the flag was not passed.'
-      );
+      ));
     }
 
     if (loadMethod === 'scriptTags') {
