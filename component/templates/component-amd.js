@@ -14,7 +14,7 @@ define([
         data: {}
       });
       <% if (isGlobal) { %>
-      Ractive.components.<%= _.slugify(name) %> = <%= _.classify(name) %>;<% } else { %>
+      Ractive.components.<%= _.camelize(name) %> = <%= _.classify(name) %>;<% } else { %>
       return <%= _.classify(name) %>;<% } %>
     }
   };

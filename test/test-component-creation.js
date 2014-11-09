@@ -80,14 +80,14 @@ describe('yo ractive:component', function () {
     });
 
     describe('when the global flag is used', function () {
-      it('should give it an isolated setting', function (done) {
+      it('should attach to the components object', function (done) {
         var _options = component.options;
         component.options.global = true;
 
         component.run([], function () {
           helpers.assertFileContent('app/scripts/components/' + componentName + '.js',
             new RegExp(
-              'Ractive.components.' + componentName + ' = ' + componentName + ';', 'i'
+              'Ractive.components.' + component._.camelize(componentName) + ' = ' + componentName + ';', 'i'
             )
           );
 
