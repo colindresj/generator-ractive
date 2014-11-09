@@ -10,4 +10,4 @@ var <%= _.classify(name) %> = Ractive.extend({
   data: {}
 });
 
-<% if (isGlobal) { %>Ractive.components.<%= _.slugify(name) %><% } else { %>module.exports<% } %> = <%= _.classify(name) %>;
+<% if (isGlobal) { %>Ractive.components.<%= _.camelize(name) %><% } else { %>module.exports<% } %> = <%= _.classify(name) %>;
