@@ -268,12 +268,12 @@ module.exports = function (grunt) {
 
     // Build the application using Browserify
     browserify: {
+      options: {
+        transform: ['ractify']
+      },
       dist: {
         files: {
-          '<%%= config.dist %>/scripts/app.js': '<%%= config.app %>/scripts/app.js',
-        },
-        options: {
-          transform: ['ractify']
+          '.tmp/scripts/app.js': '<%%= config.app %>/scripts/app.js'
         }
       }
     },<% } %>
@@ -353,7 +353,7 @@ module.exports = function (grunt) {
     //       ]
     //     }
     //   }
-    <% if (loadMethod === 'scriptTags') { %>// },
+    <% if (loadMethod === 'scriptTags' || loadMethod === 'browserify') { %>// },
     // uglify: {
     //   dist: {
     //     files: {
@@ -443,7 +443,8 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'autoprefixer',
-      'connect:livereload',
+      'connect:livereload',<% if (loadMethod === 'browserify') { %>
+      'browserify',<% } %>
       'watch'
     ]);
   });
@@ -476,9 +477,10 @@ module.exports = function (grunt) {
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
-    'autoprefixer',
+    'autoprefixer',<% if (loadMethod === 'browserify') { %>
+    'browserify',<% } %>
     'concat',
-    'cssmin',<% if (loadMethod === 'scriptTags') { %>
+    'cssmin',<% if (loadMethod === 'scriptTags' || loadMethod === 'browserify') { %>
     'uglify',<% } %>
     'copy:dist',<% if (loadMethod === 'AMD') { %>
     'requirejs',

@@ -59,7 +59,9 @@
       <p class="credit">Brought to you by <span>generator-ractive</span></p>
     </div>
     <% if (loadMethod === 'browserify') { %>
+    <!-- build:js(./.tmp) scripts/app.js -->
     <script src="scripts/app.js"></script>
+    <!-- endbuild -->
     <% } else { %>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
