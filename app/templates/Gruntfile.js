@@ -385,12 +385,12 @@ module.exports = function (grunt) {
     modernizr: {
       dist: {
         devFile: 'bower_components/modernizr/modernizr.js',
-        outputFile: '<%%= config.dist %>/scripts/vendor/modernizr.js',
+        outputFile: '<%%= config.dist %>/scripts/modernizr.js',
         files: {
           src: [
-            '<%%= config.dist %>/scripts/{,*/}*.js',
             '<%%= config.dist %>/styles/{,*/}*.css',
-            '!<%%= config.dist %>/scripts/vendor/*'
+            '<%%= config.dist %>/scripts/{,*/}*.js',
+            '!<%%= config.dist %>/scripts/modernizr.js'
           ]
         },
         uglify: true
@@ -467,10 +467,10 @@ module.exports = function (grunt) {
     'concat',
     'cssmin',<% if (loadMethod === 'scriptTags') { %>
     'uglify',<% } %>
-    'copy:dist',<% if (includeModernizr) { %>
-    'modernizr',<% } if (loadMethod === 'AMD') { %>
+    'copy:dist',<% if (loadMethod === 'AMD') { %>
     'requirejs',
-    'clean:requirejs',<% } %>
+    'clean:requirejs',<% } if (includeModernizr) { %>
+    'modernizr',<% } %>
     'rev',
     'usemin',
     'htmlmin'
