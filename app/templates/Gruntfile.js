@@ -162,14 +162,14 @@ module.exports = function (grunt) {
     jasmine: {
       all: {
         options: {
-          specs: 'test/{,*/}*.js'<% if (loadMethod === 'AMD') { %>,
+          specs: <% if (loadMethod !== 'browserify') { %>'test/{,*/}*.js'<% if (loadMethod === 'AMD') { %>,
           template: require('grunt-template-jasmine-requirejs'),
           templateOptions: {
             requireConfigFile: '<%%= config.app %>/scripts/main.js',
             requireConfig: {
               baseUrl: '<%%= config.app %>/scripts',
             }
-          }<% } %>
+          }<% } } else { %>'.tmp/scripts/tests.js'<% } %>
         }
       }
     },<% } if (includeSass) { %>
@@ -282,7 +282,7 @@ module.exports = function (grunt) {
       },
       test: {
         files: {
-          '.tmp/scripts/tests.js': 'test/{,*/}*_test.js'
+          '.tmp/scripts/tests.js': 'test/{,*/}*.js'
         }
       }
     },<% } %>
