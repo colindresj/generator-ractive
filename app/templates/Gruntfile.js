@@ -152,7 +152,7 @@ module.exports = function (grunt) {
     mocha: {
       test: {
         options: {
-          run: <%= loadMethod === 'scriptTags' %>,
+          run: <%= loadMethod !== 'AMD' %>,
           urls: ['http://<%%= connect.options.hostname %>:<%%= connect.test.options.port %>/spec_runner.html']
         }
       }
@@ -278,6 +278,11 @@ module.exports = function (grunt) {
       dist: {
         files: {
           '.tmp/scripts/app.js': '<%%= config.app %>/scripts/app.js'
+        }
+      },
+      test: {
+        files: {
+          '.tmp/scripts/tests.js': 'test/{,*/}*_test.js'
         }
       }
     },<% } %>
@@ -470,7 +475,8 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
-      <% if (testFramework === 'mocha') { %>'connect:test',
+      <% if (loadMethod === 'browserify') { %>'browserify:test',
+      <% } if (testFramework === 'mocha') { %>'connect:test',
       'mocha'<% }
       else if (testFramework === 'jasmine') { %>'jasmine'<% } %>
     ]);

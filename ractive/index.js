@@ -37,6 +37,8 @@ RactiveGenerator = yeoman.generators.NamedBase.extend({
       this.template('ractive_test.js', 'test/ractives/' + this.name + '_test.js');
     } else if (loadMethod === 'AMD') {
       this.template('ractive_test-amd.js', 'test/ractives/' + this.name + '_test.js');
+    } else if (loadMethod === 'browserify') {
+      this.template('ractive_test-browserify.js', 'test/ractives/' + this.name + '_test.js');
     }
   }
 });

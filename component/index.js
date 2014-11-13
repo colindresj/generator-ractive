@@ -73,6 +73,8 @@ ComponentGenerator = yeoman.generators.Base.extend({
       this.template('component_test.js', 'test/components/' + this.name + '_test.js');
     } else if (loadMethod === 'AMD') {
       this.template('component_test-amd.js', 'test/components/' + this.name + '_test.js');
+    } else if (loadMethod === 'browserify') {
+      this.template('component_test-browserify.js', 'test/components/' + this.name + '_test.js');
     }
   }
 });
