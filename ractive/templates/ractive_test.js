@@ -1,5 +1,5 @@
-<% if (testFramework === 'mocha') { %>/* jshint expr: true */
-<% } %>(function () {
+<% if (testFramework === 'mocha') { %>/* jshint expr: true */<% } %>
+(function () {
   'use strict';
 
   describe('<%= name %>', function () {
