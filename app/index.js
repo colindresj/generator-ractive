@@ -195,8 +195,64 @@ RactiveProjectGenerator = yeoman.generators.Base.extend({
     this.copy('gitattributes', '.gitattributes');
     this.template('jshintrc', '.jshintrc');
     this.template('_package.json', 'package.json');
-    this.template('_bower.json', 'bower.json');
     this.template('Gruntfile.js', 'Gruntfile.js');
+  },
+
+  bower: function () {
+    var bower = {
+      name: this._.slugify(this.props.project),
+      version: '0.0.0',
+      private: true,
+      dependencies: {}
+    };
+
+    var normalize = this.includeSass ? 'normalize-scss' : 'normalize-css';
+
+    if (this.includejQuery) {
+      bower.dependencies['jQuery'] = '~1.11.1';
+    }
+
+    if (this.includeModernizr) {
+      bower.dependencies.modernizr = '~2.8.2';
+    }
+
+    if (this.includeNormalize) {
+      bower.dependencies[normalize] = '~3.0.1';
+    }
+
+    if (this.props.router) {
+      if (this.includedRouter === 'director') {
+        bower.dependencies.director = '~1.2.2';
+      } else if (this.includedRouter === 'page') {
+        bower.dependencies.page === '~1.3.7';
+      } else {
+        bower.dependencies['router.js'] = '^0.6.2';
+      }
+
+      bower.overrides = bower.overrides || {};
+
+      bower.overrides[this.includedRouter] = {
+        main: this.includedRouterMainPath
+      };
+    }
+
+    if (this.loadMethod === 'AMD') {
+      bower.dependencies['requirejs-ractive'] = '~0.1.5';
+      bower.dependencies.requirejs = '~2.1.14';
+    }
+
+    if (this.loadMethod !== 'browserify') {
+      bower.dependencies.ractive = '~0.5.5';
+    }
+
+    if (this.testFramework === 'mocha') {
+      bower.devDependencies = bower.devDependencies || {};
+
+      bower.devDependencies.chai = '^1.9.1';
+      bower.devDependencies.mocha = '^1.21.4';
+    }
+
+    this.write('bower.json', JSON.stringify(bower, null, 2));
   },
 
   testfiles: function () {

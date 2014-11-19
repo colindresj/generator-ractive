@@ -67,6 +67,14 @@ describe('yo ractive', function () {
         });
       });
 
+      it('includes Ractive', function (done) {
+        ractive.run({}, function () {
+          helpers.assertFileContent('bower.json', /ractive/);
+
+          done();
+        });
+      });
+
       it('creates the expected JavaScript files', function (done) {
         var expected = [
           'Gruntfile.js',
