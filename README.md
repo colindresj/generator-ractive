@@ -99,6 +99,7 @@ Three optional client-side routers can be included when initializing the generat
 ## Changelog
 #### 0.1.0 (2014-08-20)
 - Initial release
+
 #### 0.2.0 (2014-11-18)
 - Add Browserify support
 
