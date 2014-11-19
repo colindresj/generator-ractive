@@ -37,13 +37,15 @@ Sets up a Ractive.js project.
   - Default: `false`
 
 ### ractive:ractive
-Creates a ractive file, ractive spec file and, if using AMD, ractive template.
+Creates a ractive file, ractive spec file and, if using AMD or Browserify, a
+ractive template.
 
 ##### Arguments
 - `<name>` _required_
 
 ### ractive:component
-Creates a component file, component spec file and, if using AMD, component template.
+Creates a component file, component spec file and, if using AMD or Browserify,
+a component template.
 
 ##### Arguments
 - `<name>` _required_
@@ -74,6 +76,16 @@ Supports [Require.js](http://requirejs.org/) out of the box. Just select the AMD
 option after initializing the generator. The production file is loaded with
 [Almond](https://github.com/jrburke/almond).
 
+### Browserify
+Generator Ractive also works with [Browserify](http://browserify.org/). Select
+the Browserify option after initializing the generator.
+
+__Note:__
+Browserify and JSHint watch tasks can't be run concurrently
+(see [#197](https://github.com/jmreidy/grunt-browserify/issues/197)), so the
+watch subtask for linting your source code is disabled when building with
+Browserify. Instead, linting will happen as part of the build task.
+
 ### Routing
 Three optional client-side routers can be included when initializing the generator.
 
@@ -82,12 +94,13 @@ Three optional client-side routers can be included when initializing the generat
 - [Director](https://github.com/flatiron/director)
 
 ## Coming Soon
-- Browserify support
 - Easy deployment to Heroku
 
 ## Changelog
 #### 0.1.0 (2014-08-20)
 - Initial release
+#### 0.2.0 (2014-11-18)
+- Add Browserify support
 
 ## License
 MIT
