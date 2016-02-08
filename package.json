@@ -22,7 +22,10 @@
     "test": "mocha"
   },
   "files": [
-    "app"
+    "app",
+    "ractive",
+    "component",
+    "lib"
   ],
   "keywords": [
     "yeoman-generator",
